@@ -8,7 +8,7 @@ To start the host server: run nodemon server.js
 For testing APIs used Postman 
 
 Stack:
-postgres db managment with psql -u postgres
-express.js
-react framework for the forntend 
+postgres db managment with psql -u postgres,
+express.js,
+react framework for the forntend,
 node.js for the backend 
