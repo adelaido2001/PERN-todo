@@ -10,5 +10,5 @@ For testing APIs used Postman
 Stack:
 postgres db managment with psql -u postgres,
 express.js,
-react framework for the forntend,
+react framework for the frontend,
 node.js for the backend 
