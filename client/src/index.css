@@ -5,9 +5,38 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: rgb(228, 153, 135);
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+h1 {
+  color: aliceblue;
+  font-weight: bold;
+}
+
+.form-control {
+  background-color:antiquewhite ;
+}
+
+.btn {
+  color: white;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
+}
+
+.btn-success {
+  background-color: rgb(124, 223, 153);
+}
+
+.btn-primary {
+  background-color: #79e0e7;
+}
+
+.btn-danger {
+  background-color: #FF7F50;
 }

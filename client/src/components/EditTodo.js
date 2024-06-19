@@ -1,56 +1,63 @@
 import React, { Fragment, useState } from "react";
 
 const EditTodo = ({ todo }) => {
-    // console.log(todo);
-    const [description, setDescription] = useState(todo.description)
+    // useState hook to manage the description state
+    const [description, setDescription] = useState(todo.description);
 
-    // edit modal function
-    const updateDescription = async(e) => {
-        e.preventDefault();
+    // Function to handle updating the todo description
+    const updateDescription = async (e) => {
+        e.preventDefault(); // Prevent default form submission behavior
         try {
-            const body = {description};
+            const body = { description }; // Create an object with updated description
+            // Make a PUT request to update the todo item
             const response = await fetch(`http://localhost:5000/todos/${todo.todo_id}`, {
                 method: "PUT",
-                headers: {"Content-Type": "application/json"},
-                body: JSON.stringify(body)
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body) // Convert body object to JSON string
             });
 
-            // console.log(response);
+            // After updating, redirect to the home page
             window.location = "/";
 
-        } catch(err){
-            console.error(err.message);
+        } catch (err) {
+            console.error(err.message); // Log any errors to the console
         }
-    }
+    };
 
+    // Render JSX for the EditTodo component
     return (
-    <Fragment>
+        <Fragment>
+            {/* Edit button that triggers the modal */}
+            <button type="button" className="btn btn-primary" data-toggle="modal" data-target={`#id${todo.todo_id}`}>
+                Edit
+            </button>
 
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target={`#id${todo.todo_id}`}>
-        Edit
-        </button>
-        <div class="modal" id={`id${todo.todo_id}`} onClick={() => setDescription(todo.description)}>
-        <div class="modal-dialog">
-            <div class="modal-content">
+            {/* Modal dialog for editing todo */}
+            <div className="modal" id={`id${todo.todo_id}`} onClick={() => setDescription(todo.description)}>
+                <div className="modal-dialog">
+                    <div className="modal-content">
 
-            <div class="modal-header">
-                <h4 class="modal-title">Edit Todo</h4>
-                <button type="button" class="close" data-dismiss="modal" onClick={() => setDescription(todo.description)}>&times;</button>
+                        {/* Modal header */}
+                        <div className="modal-header">
+                            <h4 className="modal-title">Edit Todo</h4>
+                            {/* Close button in modal header */}
+                            <button type="button" className="close" data-dismiss="modal" onClick={() => setDescription(todo.description)}>&times;</button>
+                        </div>
+
+                        {/* Modal body with input field for editing description */}
+                        <div className="modal-body">
+                            <input type="text" className="form-control" value={description} onChange={e => setDescription(e.target.value)} />
+                        </div>
+
+                        {/* Modal footer with update and close buttons */}
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-warning" data-dismiss="modal" onClick={e => updateDescription(e)}>Update</button>
+                            <button type="button" className="btn btn-danger" data-dismiss="modal" onClick={() => setDescription(todo.description)}>Close</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="modal-body">
-                <input type="text" className="form-control" value={ description } onChange={e => setDescription(e.target.value)}/>
-            </div>
-
-
-            <div class="modal-footer">
-                <button type="button" class="btn btn-warning" data-dismiss="modal" onClick={e => updateDescription(e)}>Update</button>
-                <button type="button" class="btn btn-danger" data-dismiss="modal" onClick={() => setDescription(todo.description)}>Close</button>
-            </div>
-            </div>
-        </div>
-        </div>
-    </Fragment>
+        </Fragment>
     );
 };
 
